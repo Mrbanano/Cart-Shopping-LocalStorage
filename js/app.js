@@ -27,9 +27,6 @@ function addCar (e){
         readDataCouse(course);
     }
 }
-
-//leer curso
-
 //read data course
 function readDataCouse (course){
     const infoCourse ={
@@ -59,6 +56,7 @@ function insertCar(course){
         </td>
     `;
     listCourse.appendChild(row);
+    saveCourseLocalStorage(course);
 }
 
 //delete car 
@@ -66,7 +64,6 @@ function insertCar(course){
 function deleteCar(e){
     e.preventDefault();
     
-    let couse;
     if (e.target.classList.contains('borrar-curso')){
         e.target.parentElement.parentElement.remove();
     }
@@ -77,4 +74,24 @@ function emptyCar(){
     while(listCourse.firstChild){
         listCourse.removeChild(listCourse.firstChild);
     }
+}
+
+//save course localstorage
+
+function saveCourseLocalStorage(course){
+    let courses;
+    courses = getCourseLoalStorage();
+    courses.push(course);
+    localStorage.setItem('courses',JSON.stringify(courses));
+}
+
+function getCourseLoalStorage(){
+    let couseLS;
+
+    if(localStorage.getItem('courses') === null){
+        couseLS = [];
+    }else{
+        couseLS =JSON.parse(localStorage.getItem('courses'));
+    }
+    return couseLS;
 }
