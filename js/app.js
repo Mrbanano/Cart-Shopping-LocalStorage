@@ -15,6 +15,8 @@ function EventListener(){
     car.addEventListener('click',deleteCar);
     //empty car 
     emptyCarBtn.addEventListener('click',emptyCar);
+    //load localstorage
+    document.addEventListener('DOMContentLoaded', readLocalStorage);
 }
 
 //funciones 
@@ -37,7 +39,6 @@ function readDataCouse (course){
     }
     insertCar(infoCourse);
 }
-
 //insert Car 
 function insertCar(course){
     const row =  document.createElement('tr');
@@ -58,33 +59,31 @@ function insertCar(course){
     listCourse.appendChild(row);
     saveCourseLocalStorage(course);
 }
-
 //delete car 
-
 function deleteCar(e){
     e.preventDefault();
-    
+    let course,courseId;
     if (e.target.classList.contains('borrar-curso')){
-        e.target.parentElement.parentElement.remove();
+        course =e.target.parentElement.parentElement
+        courseId = course.querySelector('a').getAttribute('data-id');
+        console.log(courseId)
+        course.remove();
     }
+    //deleteLocalStorge()
 }
-
 //empty car 
 function emptyCar(){
     while(listCourse.firstChild){
         listCourse.removeChild(listCourse.firstChild);
     }
 }
-
 //save course localstorage
-
 function saveCourseLocalStorage(course){
     let courses;
     courses = getCourseLoalStorage();
     courses.push(course);
     localStorage.setItem('courses',JSON.stringify(courses));
 }
-
 function getCourseLoalStorage(){
     let couseLS;
 
@@ -95,3 +94,27 @@ function getCourseLoalStorage(){
     }
     return couseLS;
 }
+//load couses in local storage 
+function readLocalStorage(){
+    let coursesLs;
+    coursesLs = getCourseLoalStorage();
+    coursesLs.forEach(function(course) {
+        const row =  document.createElement('tr');
+        row.innerHTML= `
+            <td>
+                <img src="${course.imagen}" width=100/>
+            </td>
+            <td>
+              ${course.title}
+            </td>
+        <td>
+           ${course.price}
+        </td>
+        <td>
+           <a href="#" class="borrar-curso" data-id="${course.id}">X</a>
+        </td>
+    `;
+    listCourse.appendChild(row);        
+    });
+}
+
