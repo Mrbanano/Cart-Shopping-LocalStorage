@@ -1,7 +1,6 @@
 *{
     font-family: 'Roboto', 'sans-serif';
 }
-
 body {
     background-color: #fff6f6
 }
@@ -12,15 +11,11 @@ h4 {
     font-size: 16px;
     font-weight: 700;
 }
+
 header {
     padding: 20px 0 0 0;
     background: white;
     text-align: center;
-}
-@media (min-width: 750px) {
-    header {
-        text-align: left;
-    }
 }
 .borrar-curso {
     background-color: red;
@@ -111,7 +106,6 @@ ul {
     border:none;
 }
 
-
 .barra {
     padding: 20px 0;
 background: #741d51; /* Old browsers */
@@ -133,14 +127,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#741d51', end
     margin-bottom: 40px;
     text-align: center;
 }
-@media (min-width: 750px) {
-    .icono {
-        margin-bottom:0;
-    }
-}
-
-
-
 .icono1 {
     background-image: url(../img/icono1.png);
 }
@@ -162,11 +148,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#741d51', end
     text-align: center;
     border: 1px solid #e1e1e1;
     background: white;
-}
-@media (min-width: 550px) {
-    .card {
-        text-align: left;
-    }
 }
 .info-card  {
     padding: 10px 20px;
@@ -196,3 +177,42 @@ display: block;
 margin-bottom: 10px;
 text-decoration: none;
 }
+
+@media only screen and (min-device-width: 300px) and (max-device-width: 600px) {
+    .cart{
+        display: inline-block;
+    }   
+    .count{
+        left: 50%;
+    }
+}
+
+@media only screen and (min-device-width: 601px) and (max-device-width: 800px) {
+    .cart{
+        display: inline-block;
+    }   
+    .count{
+        left: 50%;
+    }
+}
+
+@media only screen and (min-device-width: 801px) and (max-device-width: 1050px) {
+    .cart{
+        display: inline-block;
+    }   
+    .count{
+        left: 50%;
+    }
+
+}
+
+@media only screen and (min-device-width: 1051px) and (max-device-width: 4000px) {
+    .cart{
+        display: inline-block;
+    }   
+    .count{
+        left: 50%;
+    }
+
+}
+  
