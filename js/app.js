@@ -3,6 +3,7 @@ const car = document.getElementById("carrito");
 const course = document.getElementById("lista-cursos");
 const listCourse = document.querySelector("#lista-carrito tbody");
 const emptyCarBtn = document.getElementById("vaciar-carrito");
+var count = 0;
 
 //listener
 EventListener();
@@ -26,6 +27,10 @@ function addCar(e) {
     const course = e.target.parentElement.parentElement;
     //send data course
     readDataCouse(course);
+    //count
+    count +=1;
+    counter(count);
+    
   }
 }
 //read data course
@@ -61,12 +66,14 @@ function insertCar(course) {
 //delete car
 function deleteCar(e) {
   e.preventDefault();
+  count -=1;
   let course, courseId;
   if (e.target.classList.contains("borrar-curso")) {
     course = e.target.parentElement.parentElement;
     courseId = course.querySelector("a").getAttribute("data-id");
     console.log(courseId);
     course.remove();
+    counter(count);
   }
   deleteLocalStorge(courseId);
 }
@@ -76,6 +83,8 @@ function emptyCar() {
     listCourse.removeChild(listCourse.firstChild);
   }
   emptyLocalStorage();
+  counter(0
+  );
 }
 //save course localstorage
 function saveCourseLocalStorage(course) {
@@ -98,6 +107,8 @@ function getCourseLoalStorage() {
 function readLocalStorage() {
   let coursesLs;
   coursesLs = getCourseLoalStorage();
+  items = coursesLs.length;
+  itemStr=items.toString();
   coursesLs.forEach(function (course) {
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -116,12 +127,14 @@ function readLocalStorage() {
     `;
     listCourse.appendChild(row);
   });
+  //marcador
+  count = items;
+  counter(items); 
 }
 //delete id localStorage
 function deleteLocalStorge(id) {
   let courseLs;
   courseLs = getCourseLoalStorage();
-
   courseLs.forEach(function (course, index) {
     if (course.id === id) {
       courseLs.splice(index, 1);
@@ -132,4 +145,18 @@ function deleteLocalStorge(id) {
 //empty localStorage
 function emptyLocalStorage() {
   localStorage.clear();
+}
+
+
+//count 
+function counter(value){
+  let counter = document.querySelector('#count');
+  if(value <= 0 ){
+    counter.setAttribute('hidden',"");
+  }else{
+    value.toString();
+    counter.removeAttribute('hidden',"");
+    counter.classList = 'count';
+    counter = counter.innerText= value;
+  }
 }
