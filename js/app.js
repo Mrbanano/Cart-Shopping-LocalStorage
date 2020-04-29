@@ -69,7 +69,7 @@ function deleteCar(e){
         console.log(courseId)
         course.remove();
     }
-    //deleteLocalStorge()
+    deleteLocalStorge(courseId);
 }
 //empty car 
 function emptyCar(){
@@ -118,3 +118,16 @@ function readLocalStorage(){
     });
 }
 
+//delete id localStorage
+
+function deleteLocalStorge(id){
+    let courseLs;
+    courseLs = getCourseLoalStorage();
+
+    courseLs.forEach(function(course,index){
+        if(course.id === id ){
+            courseLs.splice(index,1);
+        }
+    });
+    localStorage.setItem('courses',JSON.stringify(courseLs));
+}
